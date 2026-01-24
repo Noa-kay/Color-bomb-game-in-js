@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../html/levels.css">
+        <link rel="icon" type="image/x-icon" href="../html/images/icon.png" />
+        <title>Levels</title>
+    </head>
+
+    <body>
+
+        <button id="home-button" onclick="goHome()"><a href="../html/Home.html"><img
+                    src="../html/images/icon-home.png" alt="Home"></a></button>
+
+        <a href="./game.html"><button class="level-button easy" onclick="selectLevel('easy')">Easy</button></a>
+        <a href="./game.html"><button class="level-button medium" onclick="selectLevel('medium')">Medium</button></a>
+        <a href="./game.html"></a><button class="level-button hard" onclick="selectLevel('hard')">Hard</button></a>
+
+        <div id="player-info">
+            <span id="player-name-display"></span>
+            <button onclick="changeName()">Change Name</button>
+        </div>
+
+        <div id="name-modal" class="modal">
+            <div class="modal-content">
+                <h2>Enter your name</h2>
+                <input type="text" id="player-name" placeholder="The name">
+                <button onclick="savePlayerName()">Let's go!</button>
+            </div>
+        </div>
+
+        <script src="../html/levels.js"></script>
+
+    </body>
+    <script>
+        function savePlayerName() {
+            let playerName = document.getElementById('player-name').value.trim();
+            if (!playerName) {
+                alert("Enter your name:");
+                return;
+            }
+
+            localStorage.setItem('currentPlayer', playerName);
+            document.getElementById('player-name-display').textContent = "Player: " + playerName;
+            document.getElementById('name-modal').style.display = 'none';
+        }
+
+        function changeName() {
+            document.getElementById('name-modal').style.display = 'flex';
+        }
+
+        function goHome() {
+            window.location.href = "home.html";
+        }
+
+        function selectLevel(level) {
+            localStorage.setItem('level', level);
+            window.location.href = `game.html?level=${level}`;
+        }
+
+
+        window.onload = () => {
+            let savedPlayer = localStorage.getItem('currentPlayer');
+            if (!savedPlayer) {
+                document.getElementById('name-modal').style.display = 'flex';
+            } else {
+                document.getElementById('player-name-display').textContent = "Player: " + savedPlayer;
+            }
+        };
+
+    </script>
+
+</html>
