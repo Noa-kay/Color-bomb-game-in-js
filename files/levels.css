@@ -1,15 +1,15 @@
 /* html {
-  cursor: url("../../Extras/images/cursor.png"), auto;
+  cursor: url("../Extras/images/cursor.png"), auto;
 } */
 
 body {
-  cursor: url("../../Extras/images/cursor.png") 16 16, auto !important;
+  cursor: url("../Extras/images/cursor.png") 16 16, auto !important;
   font-family: "Trebuchet MS", Arial, sans-serif;
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url("../../Extras/images/back.png");
+  background-image: url("../Extras/images/back.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

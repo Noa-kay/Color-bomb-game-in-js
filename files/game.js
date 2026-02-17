@@ -64,7 +64,7 @@ function createBoard() {
         if (i < width) {
             if (bombIndexes.includes(i)) {
                 const bomb = document.createElement('img');
-                bomb.src = '../../Extras/images/bomb.png';
+                bomb.src = '../Extras/images/bomb.png';
                 bomb.classList.add('bomb');
                 box.appendChild(bomb);
                 box.dataset.hasBomb = "true";
