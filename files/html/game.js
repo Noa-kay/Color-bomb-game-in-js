@@ -11,7 +11,21 @@ const scoreDisplay = document.getElementById('score');
 const matchSound = document.getElementById('match-sound');
 
 const urlParams = new URLSearchParams(window.location.search);
-let level = parseInt(urlParams.get('level')) || 1;
+const levelParam = urlParams.get('level');
+
+function getLevelNumber(value) {
+    if (!value) return 1;
+    const normalized = String(value).toLowerCase();
+    if (normalized === 'easy') return 1;
+    if (normalized === 'medium') return 2;
+    if (normalized === 'hard') return 3;
+
+    const parsed = parseInt(normalized, 10);
+    if (Number.isNaN(parsed)) return 1;
+    return Math.min(3, Math.max(1, parsed));
+}
+
+let level = getLevelNumber(levelParam);
 
 let bombCount = 0;
 
@@ -50,7 +64,7 @@ function createBoard() {
         if (i < width) {
             if (bombIndexes.includes(i)) {
                 const bomb = document.createElement('img');
-                bomb.src = '../html/images/bomb.png';
+                bomb.src = '../../Extras/images/bomb.png';
                 bomb.classList.add('bomb');
                 box.appendChild(bomb);
                 box.dataset.hasBomb = "true";
@@ -118,7 +132,11 @@ function resetBoard() {
 }
 
 function handleBoxClick(event) {
-    const clickedBox = event.target;
+    const clickedBox = event.currentTarget;
+
+    if (!clickedBox) {
+        return;
+    }
 
     if (selectedBox !== null) {
         selectedBox.classList.remove('selected');
@@ -128,8 +146,14 @@ function handleBoxClick(event) {
         selectedBox = clickedBox;
         selectedBox.classList.add('selected');
     } else {
+        if (selectedBox === clickedBox) {
+            selectedBox = null;
+            return;
+        }
+
         if (isAdjacent(selectedBox, clickedBox)) {
-            swapBoxes(selectedBox, clickedBox);
+            const previousSelected = selectedBox;
+            swapBoxes(previousSelected, clickedBox);
             fillEmptySpaces();
             selectedBox.classList.remove('selected');
             selectedBox = null;
@@ -141,21 +165,30 @@ function handleBoxClick(event) {
                 if (checkForMatches()) {
                     updateBoard();
                 } else {
-                    swapBoxes(clickedBox, selectedBox);
-                    fillEmptySpaces();
+                    checkEndOfTurnResult();
                 }
             }, 300);
-
-            if (moves <= 0) {
-                window.location.href = 'game-over.html';
-                return;
-            }
+        } else {
+            selectedBox = clickedBox;
+            selectedBox.classList.add('selected');
         }
     }
 }
 
-function updateMovesDisplay() {
-    document.getElementById('moves').textContent = moves;
+function hasVisibleBombs() {
+    return boxes.some(box => box && box.querySelector('img.bomb'));
+}
+
+function checkEndOfTurnResult() {
+    if (moves > 0) {
+        return;
+    }
+
+    if (hasVisibleBombs()) {
+        window.location.href = 'game-over.html';
+    } else {
+        window.location.href = 'winner.html';
+    }
 }
 
 
@@ -251,6 +284,7 @@ function playMatchSound() {
 
 function playBombSound() {
     const bombSound = document.getElementById('bomb-sound');
+    bombSound.currentTime = 0;
     bombSound.play().then(() => {
         console.log('Bomb sound played');
     }).catch(err => {
@@ -284,6 +318,7 @@ function fillEmptySpaces() {
 
 function dropBomb() {
     let bombFalling = true;
+    let bombRemoved = false;
     while (bombFalling) {
         bombFalling = false;
         for (let i = width * (width - 1) - 1; i >= 0; i--) {
@@ -292,6 +327,8 @@ function dropBomb() {
             const row = Math.floor(i / width);
             if (row >= width - 2) {
                 boxes[i].removeChild(bomb);
+                playBombSound();
+                bombRemoved = true;
             } else if (boxes[i + width] && boxes[i + width].classList.contains('empty')) {
                 boxes[i].removeChild(bomb);
                 boxes[i + width].appendChild(bomb);
@@ -299,21 +336,9 @@ function dropBomb() {
             }
         }
     }
-}
 
-function checkIfWin() {
-    let bombsVisible = false;
-    const bomb = box.querySelector('img.bomb');
-    boxes.forEach(box => {
-        if (box.dataset.hasBomb === "true") {
-            bombsVisible = true;
-        }
-    });
-    if (!bombsVisible) {
-        window.location.href = 'winner.html';
-    }
-    else{
-        window.location.href = 'game-over.html';
+    if (bombRemoved) {
+        checkIfWin();
     }
 }
 
@@ -356,17 +381,7 @@ function removeBombAndCheckIfWin(box) {
 }
 
 function checkIfWin() {
-    let bombsVisible = false;
-
-    boxes.forEach(box => {
-        if (box) {
-            const bomb = box.querySelector('img.bomb');
-            if (bomb) {
-                bombsVisible = true;
-            }
-        }
-    });
-    if (!bombsVisible) {
+    if (!hasVisibleBombs()) {
         window.location.href = 'winner.html';
     }
 }
@@ -407,10 +422,11 @@ function updateBoard() {
         setTimeout(() => {
             if (checkForMatches()) {
                 updateBoard();
+            } else {
+                checkEndOfTurnResult();
             }
         }, 300);
     }, 600);
 }
 
 createBoard();
-debugger;

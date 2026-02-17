@@ -5,18 +5,27 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../html/levels.css">
-        <link rel="icon" type="image/x-icon" href="../html/images/icon.png" />
+        <link rel="icon" type="image/x-icon" href="../../Extras/images/icon.png" />
         <title>Levels</title>
     </head>
 
     <body>
 
         <button id="home-button" onclick="goHome()"><a href="../html/Home.html"><img
-                    src="../html/images/icon-home.png" alt="Home"></a></button>
+                    src="../../Extras/images/icon-home.png" alt="Home"></a></button>
 
-        <a href="./game.html"><button class="level-button easy" onclick="selectLevel('easy')">Easy</button></a>
-        <a href="./game.html"><button class="level-button medium" onclick="selectLevel('medium')">Medium</button></a>
-        <a href="./game.html"></a><button class="level-button hard" onclick="selectLevel('hard')">Hard</button></a>
+        <main class="levels-layout">
+            <section class="levels-card">
+                <h1>Choose Your Level</h1>
+                <p class="subtitle">בחרי רמת קושי והתחילי משחק</p>
+
+                <div class="level-buttons">
+                    <button class="level-button easy" onclick="selectLevel('easy')">Easy</button>
+                    <button class="level-button medium" onclick="selectLevel('medium')">Medium</button>
+                    <button class="level-button hard" onclick="selectLevel('hard')">Hard</button>
+                </div>
+            </section>
+        </main>
 
         <div id="player-info">
             <span id="player-name-display"></span>
@@ -52,7 +61,7 @@
         }
 
         function goHome() {
-            window.location.href = "home.html";
+            window.location.href = "Home.html";
         }
 
         function selectLevel(level) {

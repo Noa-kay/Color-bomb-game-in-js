@@ -1,13 +1,13 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const buttons = document.querySelectorAll(".level-btn");
+    const buttons = document.querySelectorAll(".level-button");
     if (buttons.length) {
         buttons.forEach(button => {
             button.addEventListener("click", function () {
-                const level = this.getAttribute("data-level");
+                const level = this.textContent.trim().toLowerCase();
                 localStorage.setItem("difficulty", level);
                 localStorage.setItem("currentLevel", 1);
                 localStorage.setItem("remainingBombs", getLevelSettings(level, 1).bombCount);
-                window.location.href = "../game.html";
+                window.location.href = `./game.html?level=${level}`;
             });
         });
     } else {
@@ -69,7 +69,7 @@ function useBomb() {
 function checkGameOver() {
     let bombs = parseInt(localStorage.getItem("remainingBombs")) || 0;
     if (bombs > 0) {
-        window.location.href = "gameover.html";
+        window.location.href = "game-over.html";
     }
 }
 

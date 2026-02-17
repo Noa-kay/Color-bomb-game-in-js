@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" type="image/x-icon" href="../html/images/icon.png" />
+        <link rel="icon" type="image/x-icon" href="../../Extras/images/icon.png" />
         <link rel="stylesheet" href="../html/Home.css">
         <title>הוראות משחק</title>
     </head>
@@ -13,114 +13,210 @@
 
         <button class="home-button">
             <a href="../html/Home.html">
-                <img src="../html/images/icon-home.png" alt="Home">
+                <img src="../../Extras/images/icon-home.png" alt="Home">
             </a>
         </button>
-        <h1>📜 הוראות המשחק</h1>
+        <main class="instructions-card">
+            <h1>הוראות המשחק</h1>
 
-        <p><strong>🎯 מטרה:</strong><br>
-            המטרה שלך היא לשגר רקטות ולהסיר את כל הפצצות מהלוח לפני שייגמרו לך המהלכים.
-        </p>
+            <section class="panel panel-goal">
+                <h2>המטרה</h2>
+                <p>המטרה שלך היא לשגר רקטות ולהסיר את כל הפצצות מהלוח לפני שייגמרו לך המהלכים.</p>
+            </section>
 
-        <p><strong>🎮 איך משחקים?</strong></p>
-        <ul>
-            <li>החלפת קופסאות: לחץ על שתי קופסאות סמוכות כדי להחליף ביניהן.</li>
-            <li>יצירת התאמות: שלוש קופסאות מאותו צבע בשורה או בטור ייעלמו.</li>
-            <li>הפצצות: עליך לגרום לפצצות להגיע לשורה השנייה מהסוף כדי שיתפוצצו.</li>
-            <li>מהלכים מוגבלים: לכל שלב מספר מוגבל של מהלכים, השתמש בהם בתבונה!</li>
-            <li>(אין צורך ללחוץ על הקופסאות הריקות או על הפצצות. זה לא יוצר כלום.)</li>
-        </ul>
+            <section class="panel panel-rules">
+                <h2>איך משחקים?</h2>
+                <ul>
+                    <li>החלפת קופסאות: לחץ על שתי קופסאות סמוכות כדי להחליף ביניהן.</li>
+                    <li>יצירת התאמות: שלוש קופסאות מאותו צבע בשורה או בטור ייעלמו.</li>
+                    <li>הפצצות: עליך לגרום לפצצות להגיע לשורה השנייה מהסוף כדי שיתפוצצו.</li>
+                    <li>מהלכים מוגבלים: לכל שלב מספר מוגבל של מהלכים, השתמש בהם בתבונה.</li>
+                    <li>אין צורך ללחוץ על קופסאות ריקות או על פצצות — זה לא יוצר מהלך.</li>
+                </ul>
+            </section>
 
-        <p><strong>🏆 כיצד מנצחים?</strong></p>
-        <ul>
-            <li>הסר את <b>כל</b> הפצצות מהלוח לפני שנגמרים לך המהלכים.</li>
-        </ul>
+            <div class="result-grid">
+                <section class="panel panel-win">
+                    <h2>איך מנצחים?</h2>
+                    <p>מסירים <b>את כל הפצצות</b> מהלוח לפני שנגמרים המהלכים.</p>
+                </section>
 
-        <p><strong>❌ כיצד מפסידים?</strong></p>
-        <ul>
-            <li class="lost">אם נגמרים לך המהלכים ויש עדיין פצצות על הלוח.</li>
-        </ul>
+                <section class="panel panel-lose">
+                    <h2>איך מפסידים?</h2>
+                    <p>אם נגמרים המהלכים ועדיין נשארת לפחות פצצה אחת על הלוח.</p>
+                </section>
+            </div>
 
-        <p><strong>🚀 רמות קושי:</strong><br>
-            ישנם <b>שלושה שלבים</b> ברמות קושי שונות. בחר את השלב המתאים לך בדף הבחירה!
-        </p>
+            <section class="panel panel-levels">
+                <h2>רמות קושי</h2>
+                <p>ישנם <b>שלושה שלבים</b> ברמות קושי שונות. בחר את השלב המתאים לך בדף הבחירה.</p>
+            </section>
 
-        <p><strong>💥 בהצלחה! </strong>🚀🔥</p>
+            <p class="good-luck">בהצלחה!</p>
+        </main>
 
         <style>
             body {
-                font-family: "Arial", sans-serif;
+                font-family: "Trebuchet MS", "Arial", sans-serif;
                 min-height: 100vh;
                 display: flex;
-                flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                text-align: center;
-                background-image: url("../html/images/back.png");
+                background-image: url("../../Extras/images/back.png");
                 background-size: cover;
                 background-position: center;
                 background-repeat: no-repeat;
-                font-size: 1.2rem;
-                color: #333;
-                padding: 20px;
+                color: #2e2e2e;
+                padding: 16px;
+                direction: rtl;
+                overflow: hidden;
+            }
+
+            .instructions-card {
+                width: min(860px, 92vw);
+                max-height: none;
+                overflow: hidden;
+                background: rgba(255, 255, 255, 0.9);
+                border: 4px solid #ffffff;
+                border-radius: 22px;
+                padding: 24px;
+                box-shadow: 0 14px 28px rgba(0, 0, 0, 0.2);
+                display: grid;
+                gap: 14px;
+                text-align: center;
+                transform: translateY(-28px);
             }
 
             h1 {
-                font-size: 2.5rem;
-                font-weight: bold;
-                color: #ff6600;
-                text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-                margin-bottom: 20px;
+                margin: 0;
+                text-align: center;
+                font-size: clamp(1.8rem, 3vw, 2.4rem);
+                color: #5f3f56;
+                letter-spacing: 0.5px;
             }
 
-            p {
-                font-size: 1.2rem;
-                line-height: 1.6;
-                max-width: 800px;
-                text-align: justify;
-                background: rgba(255, 255, 255, 0.8);
-                padding: 10px 15px;
-                border-radius: 10px;
+            h2 {
+                margin: 0 0 8px;
+                font-size: 1.25rem;
+                color: #5f3f56;
             }
 
-            strong {
-                color: #ff3300;
+            .panel {
+                border-radius: 14px;
+                padding: 14px 16px;
+                border: 2px solid rgba(255, 255, 255, 0.85);
             }
 
-            ul {
+            .panel p {
+                margin: 0;
+                line-height: 1.65;
+                color: #2e2e2e;
+                font-size: 1.03rem;
+            }
+
+            .panel-rules ul {
+                margin: 0;
+                padding: 0 18px 0 0;
                 list-style: none;
-                padding: 0;
+                display: grid;
+                gap: 8px;
             }
 
-            ul li {
+            .panel-rules li {
+                position: relative;
+                line-height: 1.45;
+                color: #2e2e2e;
+                font-size: 1rem;
+                padding-right: 18px;
+                text-align: right;
+            }
+
+            .panel-rules li::before {
+                content: "";
+                position: absolute;
+                right: 0;
+                color: #5f3f56;
+                font-weight: 700;
+            }
+
+            .result-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+                gap: 12px;
+            }
+
+            .panel-goal {
+                background: linear-gradient(135deg, rgba(252, 205, 75, 0.5), rgba(247, 181, 0, 0.35));
+            }
+
+            .panel-rules {
+                background: linear-gradient(135deg, rgba(158, 201, 233, 0.45), rgba(145, 254, 254, 0.35));
+            }
+
+            .panel-win {
+                background: linear-gradient(135deg, rgba(171, 114, 251, 0.35), rgba(248, 167, 193, 0.4));
+            }
+
+            .panel-lose {
+                background: linear-gradient(135deg, rgba(252, 142, 68, 0.45), rgba(255, 179, 179, 0.45));
+            }
+
+            .panel-levels {
+                background: linear-gradient(135deg, rgba(204, 255, 204, 0.55), rgba(84, 241, 181, 0.35));
+            }
+
+            .good-luck {
+                margin: 6px 0 0;
+                text-align: center;
                 font-size: 1.2rem;
-                padding: 8px 0;
-            }
-
-            ul li::before {
-                content: "✔️ ";
-                font-weight: bold;
-                color: green;
-            }
-
-            ul li.lost::before {
-                content: "❌ ";
-                color: red;
+                color: #5f3f56;
+                font-weight: 700;
             }
 
             .home-button {
                 position: absolute;
                 top: 20px;
                 left: 20px;
-                font-size: 2.5rem;
-                padding: 0.8em 1em;
+                width: 78px;
+                height: 78px;
+                padding: 0;
+                border: 0;
+                border-radius: 12px;
+                background-color: #f0f0f0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 100;
+            }
+
+            .home-button a {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
 
             .home-button img {
                 width: 50px;
-                height: auto;
-                left: 20%;
+                height: 50px;
+                object-fit: contain;
+                position: static;
                 z-index: 2;
+            }
+
+            @media (max-width: 640px) {
+                body {
+                    padding-top: 84px;
+                    padding-left: 10px;
+                    padding-right: 10px;
+                }
+
+                .instructions-card {
+                    padding: 16px;
+                    border-radius: 16px;
+                    max-height: none;
+                }
             }
         </style>
     </body>
