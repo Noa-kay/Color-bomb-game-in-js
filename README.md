@@ -32,7 +32,7 @@
 מהתיקייה הראשית של הפרויקט:
 
 ```bash
-python3 -m http.server 8000
+Open with Live Server
 ```
 
 ואז לפתוח בדפדפן:
